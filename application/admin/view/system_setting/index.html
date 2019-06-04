@@ -1,35 +1,46 @@
-<div class="box">
-    <div class="box-body">
-        <form method="POST" class="form-horizontal form_single">
-            <div class="form-group">
-                <label class="col-sm-2 control-label">系统名称</label>
-                <div class="col-sm-6">
-                    <input name="name" class="form-control">
+<div class="row">
+    <div class="col-md-12">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#default" data-toggle="tab">默认</a></li>
+                <li><a href="#plugin" data-toggle="tab">插件</a></li>
+            </ul>
+            <form method="POST" class="form-horizontal form_single tab-content">
+                <div class="tab-pane active" id="default">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">系统名称</label>
+                        <div class="col-sm-6">
+                            <input name="name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">开启管理日志</label>
+                        <div class="col-sm-6">
+                            <input type="checkbox" name="open_admin_log" class="switch">
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">开启管理日志</label>
-                <div class="col-sm-6">
-                    <input type="checkbox" name="open_admin_log" class="switch">
+                <div class="tab-pane" id="plugin">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">存储插件</label>
+                        <div class="col-sm-6">
+                            <select name="storage" class="form-control">
+                                <option value="">请选择</option>
+                                {foreach $storagePluginList as $k => $v}
+                                <option value="{$k}">{$v}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">存储插件</label>
-                <div class="col-sm-6">
-                    <select name="storage" class="form-control">
-                        <option value="">请选择</option>
-                        {foreach $storagePluginList as $k => $v}
-                        <option value="{$k}">{$v}</option>
-                        {/foreach}
-                    </select>
+                <div class="form-group">
+                    <div class="col-sm-6 col-sm-offset-2">
+                        <button type="submit" class="btn btn-primary ladda-button ajax-post" data-style="slide-up"
+                            target-form="form_single">确定</button>
+                        <button type="button" class="btn btn-primary" onclick="history.back(-1);">返回</button>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-6 col-sm-offset-2">
-                    <button type="submit" class="btn btn-primary ladda-button ajax-post" data-style="slide-up" target-form="form_single">确定</button>
-                    <button type="button" class="btn btn-primary" onclick="history.back(-1);">返回</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>

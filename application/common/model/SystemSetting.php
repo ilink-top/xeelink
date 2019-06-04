@@ -3,9 +3,10 @@ namespace app\common\model;
 
 class SystemSetting extends Base
 {
-    public static function getSetting()
+    public static function getSetting($where = [])
     {
         return self::getInstance()
+            ->where($where)
             ->order('id asc')
             ->column('value', 'name');
     }
