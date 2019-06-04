@@ -2,7 +2,7 @@
 
 https://github.com/linkease/LibraAdmin
 
-## 安装步骤
+## 安装系统
 
 - 更改数据库信息
 
@@ -20,4 +20,11 @@ composer install
 
 ~~~
 导入 /database/libra_admin.sql
+~~~
+
+## 后台账号密码
+
+~~~
+账号 admin
+密码 admin
 ~~~

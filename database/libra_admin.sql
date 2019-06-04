@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 22/05/2019 13:22:35
+ Date: 04/06/2019 15:55:48
 */
 
 SET NAMES utf8mb4;
@@ -33,14 +33,14 @@ CREATE TABLE `lib_admin` (
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '注册时间',
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+  UNIQUE KEY `unique_username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='管理用户表';
 
 -- ----------------------------
 -- Records of lib_admin
 -- ----------------------------
 BEGIN;
-INSERT INTO `lib_admin` VALUES (1, 'admin', '$2y$10$4B.qM1AMC0LUgHcsNbJUyeVPCO.vE9R3PDnmKI5Tk.J2ctbBi7Vm.', 'admin', '', 0, 1558492648, 0, 1556508911, 1558492648);
+INSERT INTO `lib_admin` VALUES (1, 'admin', '$2y$10$4B.qM1AMC0LUgHcsNbJUyeVPCO.vE9R3PDnmKI5Tk.J2ctbBi7Vm.', 'admin', '20190603/8cfef9f7aed9c81dcb9020942bef1404.jpg', 0, 1559532703, 0, 1556508911, 1559630194);
 COMMIT;
 
 -- ----------------------------
@@ -49,11 +49,11 @@ COMMIT;
 DROP TABLE IF EXISTS `lib_admin_auth`;
 CREATE TABLE `lib_admin_auth` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL DEFAULT '' COMMENT '名称',
+  `name` varchar(20) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '名称',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态：0:禁用;1:启用;',
   `sort` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='管理权限表';
 
 -- ----------------------------
 -- Table structure for lib_admin_auth_access
@@ -62,7 +62,7 @@ DROP TABLE IF EXISTS `lib_admin_auth_access`;
 CREATE TABLE `lib_admin_auth_access` (
   `auth_id` int(11) NOT NULL DEFAULT '0' COMMENT '权限ID',
   `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户ID'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='管理用户权限关联表';
 
 -- ----------------------------
 -- Table structure for lib_admin_auth_menu
@@ -71,7 +71,7 @@ DROP TABLE IF EXISTS `lib_admin_auth_menu`;
 CREATE TABLE `lib_admin_auth_menu` (
   `auth_id` int(11) NOT NULL DEFAULT '0' COMMENT '权限ID',
   `menu_id` int(11) NOT NULL DEFAULT '0' COMMENT '菜单ID'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='管理权限菜单关联表';
 
 -- ----------------------------
 -- Table structure for lib_admin_log
@@ -85,7 +85,7 @@ CREATE TABLE `lib_admin_log` (
   `ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '操作IP',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='管理日志表';
 
 -- ----------------------------
 -- Table structure for lib_admin_menu
@@ -104,7 +104,7 @@ CREATE TABLE `lib_admin_menu` (
   `sort` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`id`),
   KEY `url` (`url`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='管理菜单表';
 
 -- ----------------------------
 -- Records of lib_admin_menu
@@ -132,6 +132,7 @@ INSERT INTO `lib_admin_menu` VALUES (19, 18, '驱动列表', 'system_plugin/driv
 INSERT INTO `lib_admin_menu` VALUES (20, 18, '安装驱动', 'system_plugin/add', 'fa-circle-o', 0, 1, 1, '', 100);
 INSERT INTO `lib_admin_menu` VALUES (21, 18, '设置驱动', 'system_plugin/edit', 'fa-circle-o', 0, 1, 1, '', 100);
 INSERT INTO `lib_admin_menu` VALUES (22, 18, '卸载驱动', 'system_plugin/delete', 'fa-circle-o', 0, 1, 1, '', 100);
+INSERT INTO `lib_admin_menu` VALUES (23, 1, '系统配置', 'system_setting/index', 'fa-circle-o', 1, 1, 1, '', 100);
 COMMIT;
 
 -- ----------------------------
@@ -146,7 +147,7 @@ CREATE TABLE `lib_system_demo` (
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   `delete_time` int(11) NOT NULL DEFAULT '0' COMMENT '删除时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统示例表';
 
 -- ----------------------------
 -- Table structure for lib_system_plugin
@@ -156,10 +157,34 @@ CREATE TABLE `lib_system_plugin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(40) NOT NULL DEFAULT '' COMMENT '插件类型',
   `driver` varchar(20) NOT NULL DEFAULT '' COMMENT '插件驱动',
+  `driver_name` varchar(20) NOT NULL COMMENT '驱动名称',
   `config` text NOT NULL COMMENT '插件配置',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：0:禁用;1:启用;',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '安装时间',
-  `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `update_time` int(20) NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `unique_type_driver` (`type`,`driver`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统插件表';
+
+-- ----------------------------
+-- Table structure for lib_system_setting
+-- ----------------------------
+DROP TABLE IF EXISTS `lib_system_setting`;
+CREATE TABLE `lib_system_setting` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `value` text,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `unique_name` (`name`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统配置表';
+
+-- ----------------------------
+-- Records of lib_system_setting
+-- ----------------------------
+BEGIN;
+INSERT INTO `lib_system_setting` VALUES (1, 'name', '管理系统');
+INSERT INTO `lib_system_setting` VALUES (2, 'open_admin_log', '0');
+INSERT INTO `lib_system_setting` VALUES (3, 'storage', 'qiniu');
+COMMIT;
+
+SET FOREIGN_KEY_CHECKS = 1;
