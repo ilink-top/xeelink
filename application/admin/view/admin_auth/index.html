@@ -1,0 +1,40 @@
+<div class="box">
+    <div class="box-header">
+        <a href="{:url('add')}" class="btn btn-primary">添加</a>
+        <a href="{:url('delete')}" class="btn btn-danger batch_btn confirm ajax-post">删除</a>
+    </div>
+    <div class="box-body table-responsive">
+        <table class="table table-bordered table-hover datatable" data-order="[]">
+            <thead>
+                <tr>
+                    <th class="checkbox-select-all">
+                        <label>
+                            <input class="icheck js-checkbox-all" type="checkbox">
+                        </label>
+                    </th>
+                    <th>名称</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {foreach $list as $row}
+                <tr>
+                    <td>
+                        <label>
+                            <input class="icheck" type="checkbox" name="id[]" value="{$row.id}">
+                        </label>
+                    </td>
+                    <td>{$row.name}</td>
+                    <td>{$row.status_text|raw}</td>
+                    <td class="col-md-3">
+                        <a href="{:url('menu', ['id' => $row.id])}" class="btn btn-info">菜单</a>
+                        <a href="{:url('edit', ['id' => $row.id])}" class="btn btn-primary">编辑</a>
+                        <a href="{:url('delete', ['id' => $row.id])}" class="btn btn-danger confirm ajax-get">删除</a>
+                    </td>
+                </tr>
+                {/foreach}
+            </tbody>
+        </table>
+    </div>
+</div>

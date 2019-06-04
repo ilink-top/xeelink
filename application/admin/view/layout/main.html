@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {include file="layout/header"/}
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header class="main-header">
+            <a href="{:url('index/index')}" class="logo">
+                <span class="logo-mini"><i class="fa fa-tachometer"></i></span>
+                <span class="logo-lg"><b>{:setting('name')}</b></span>
+            </a>
+            <nav class="navbar navbar-static-top">
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">导航开关</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{:image_url($user_info.avatar)}" class="user-image" alt="{:setting('name')}" onerror="$(this).attr('src', '__STATIC__/admin/img/avatar.png')">
+                                <span class="hidden-xs">{$user_info.name}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="user-header">
+                                    <img src="{:image_url($user_info.avatar)}" class="img-circle" alt="{:setting('name')}" onerror="$(this).attr('src', '__STATIC__/admin/img/avatar.png')">
+                                    <p>
+                                        {$user_info.name}
+                                        <small>{$user_info.login_time}</small>
+                                    </p>
+                                </li>
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="{:url('index/profile')}" class="btn btn-default btn-flat">个人信息</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="{:url('auth/logout')}" class="btn btn-default btn-flat">安全退出</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="{:image_url($user_info.avatar)}" class="img-circle" alt="{:setting('name')}" onerror="$(this).attr('src', '__STATIC__/admin/img/avatar.png')">
+                    </div>
+                    <div class="pull-left info">
+                        <p>{$user_info.name}</p>
+                    </div>
+                </div>
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="header">管理菜单</li>
+                    <li>
+                        <a href="{:url('index/index')}">
+                            <i class="fa fa-home"></i>
+                            <span>系统首页</span>
+                        </a>
+                    </li>
+                    {$menu_view|raw}
+                    <li class="header">站点导航</li>
+                    <li>
+                        <a href="{:url('index/index/index')}" target="_blank">
+                            <i class="fa fa-circle-o text-aqua"></i>
+                            <span>站点首页</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+        <div class="content-wrapper">
+            {include file="layout/content_header"/}
+            <section class="content">
+                {__CONTENT__}
+            </section>
+        </div>
+        <footer class="main-footer">
+            <strong>
+                版权©2018 - {:date('Y')} {:setting('name')} .
+            </strong>
+            保留所有权利。
+        </footer>
+    </div>
+    {include file="layout/footer"/}
+</body>
+
+</html>

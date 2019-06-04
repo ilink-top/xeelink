@@ -1,0 +1,58 @@
+<div class="row" id="{$md5}">
+    <div class="col-sm-4">
+        <select name="{$name.province}" class="form-control">
+            <option value="0">---请选择省---</option>
+            {foreach $data.province as $key => $val}
+            <option value="{$key}">{$val}</option>
+            {/foreach}
+        </select>
+    </div>
+    <div class="col-sm-4">
+        <select name="{$name.city}" class="form-control">
+            <option value="0">---请选择市---</option>
+            {foreach $data.city as $key => $val}
+            <option value="{$key}">{$val}</option>
+            {/foreach}
+        </select>
+    </div>
+    <div class="col-sm-4">
+        <select name="{$name.district}" class="form-control">
+            <option value="0">---请选择区/县---</option>
+            {foreach $data.district as $key => $val}
+            <option value="{$key}">{$val}</option>
+            {/foreach}
+        </select>
+    </div>
+</div>
+<script>
+var provinceObj = $("#{$md5}").find("[name='{$name.province}']");
+var cityObj = $("#{$md5}").find("[name='{$name.city}']");
+var districtObj = $("#{$md5}").find("[name='{$name.district}']");
+provinceObj.change(function() {
+    cityObj.html('');
+    cityObj.append('<option value="">---请选择市---</option>');
+    districtObj.html('');
+    districtObj.append('<option value="">---请选择区/县---</option>');
+    getArea($(this).val(), function(res) {
+        $.each(res, function(i, v) {
+            cityObj.append('<option value="' + i + '">' + v + '</option>');
+        })
+    })
+})
+cityObj.change(function() {
+    districtObj.html('');
+    districtObj.append('<option value="">---请选择区/县---</option>');
+    getArea($(this).val(), function(res) {
+        $.each(res, function(i, v) {
+            districtObj.append('<option value="' + i + '">' + v + '</option>');
+        })
+    })
+})
+function getArea(parent_id, callback) {
+    $.get("{:url('system_area/data')}", {
+        parent_id: parent_id
+    }, function(data) {
+        callback && callback(data);
+    });
+}
+</script>

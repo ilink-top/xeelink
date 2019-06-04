@@ -1,0 +1,81 @@
+<div class="col-sm-12 form-group">
+    <label class="btn btn-info btn-file">
+        选择文件
+        <input type="file" id="{$md5}" name="{$md5}" accept="{:implode(',', $ext)}" multiple>
+    </label>
+</div>
+<div class="col-sm-12 form-group" id="{$name}_prview">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>文件名</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {foreach $value as $key => $row}
+            <tr>
+                <td><a href="{:image_url($row)}" target="_blank"><i class="fa fa-camera"></i> {:basename($row)}</a></td>
+                <td>
+                    <span class="badge bg-light-blue">加载文件</span>
+                </td>
+                <td>
+                    <input type="hidden" name="{$name}[]">
+                    <button type="button" class="btn btn-danger btn-xs confirm action-delete">删除</button>
+                </td>
+            </tr>
+            {/foreach}
+        </tbody>
+    </table>
+</div>
+<script>
+    $(function () {
+        var option = {
+            url: "{:url('SystemFile/upload', ['type' => 'image', 'name' => $md5])}",
+            dataType: "json",
+        };
+        option.add = function (e, data) {
+            $("#{$name}_prview").removeClass("hide");
+            var tr = '<tr>\
+                <td><a target="_blank"><i class="fa fa-camera"></i> '+ data.files[0].name + '</a></td>\
+                <td>\
+                    <div class="progress progress-sm active">\
+                        <div class="progress-bar progress-bar-success progress-bar-striped"></div>\
+                    </div>\
+                </td>\
+                <td>\
+                    <button type="button" class="btn btn-danger btn-xs confirm action-delete">删除</button>\
+                </td>\
+            </tr>';
+            data.context = $(tr).appendTo($("#{$name}_prview table tbody"));
+            data.submit();
+        };
+        option.progress = function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            data.context.find(".progress-bar").css("width", progress + "%");
+        };
+        option.done = function (e, data) {
+            var result = data.result;
+            if (result.code == 0) {
+                option.fail(e, data);
+                return false;
+            }
+            data.context.find("td:eq(0) a").attr('href', webinfo.imageUrl + result.data.url);
+            data.context.find("td:eq(1)").html('<span class="badge bg-green">上传成功</span>');
+            data.context.find("td:eq(2)").prepend('<input type="hidden" name="{$name}[]" value="' + result.data.url + '">');
+        };
+        option.fail = function (e, data) {
+            data.context.find("td:eq(1)").html('<span class="badge bg-red">上传失败</span>');
+        };
+        $("#{$md5}").fileupload(option);
+        $("#{$name}_prview").on("click", ".action-delete", function () {
+            if ($(this).hasClass('confirm')) {
+                if (!confirm('确认要执行该操作吗?')) {
+                    return false;
+                }
+            }
+            $(this).parents("tr").remove();
+        })
+    });
+</script>

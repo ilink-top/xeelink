@@ -1,0 +1,26 @@
+<select name="{$name}" class="form-control">
+    <option></option>
+    {foreach $icon_group as $group => $icons}
+    <optgroup label="{$group}">
+        {foreach $icons as $icon}
+        <option>{$icon}</option>
+        {/foreach}
+    </optgroup>
+    {/foreach}
+</select>
+<script>
+    $(function() {
+        $("select[name={$name}]").select2({
+            placeholder: "请选择图标",
+            templateResult: function (state) {
+                if (!state.id) {
+                    return state.text;
+                }
+                var $state = $(
+                    '<i class="fa ' + state.text + '"><i/> ' + state.text + '<span>'
+                );
+                return $state;
+            }
+        });
+    })
+</script>
