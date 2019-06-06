@@ -1,11 +1,11 @@
 <?php
 namespace app\admin\controller;
 
-use app\common\model\SystemDemo as SystemDemoModel;
+use app\common\model\User as UserModel;
 
-class SystemDemo extends BaseAuth
+class User extends BaseAuth
 {
-    public function __construct(SystemDemoModel $model)
+    public function __construct(UserModel $model)
     {
         parent::__construct();
         $this->model = $model;
@@ -33,7 +33,7 @@ class SystemDemo extends BaseAuth
             $map[] = ['status', '=', $param['status']];
         }
         if (isset($param['keyword']) && $param['keyword']) {
-            $map[] = ['name', 'like', '%' . $param['keyword'] . '%'];
+            $map[] = ['username|nickname', 'like', '%' . $param['keyword'] . '%'];
         }
 
         return $map;
@@ -44,9 +44,6 @@ class SystemDemo extends BaseAuth
         $param = $this->request->param();
 
         if ($this->request->isPost()) {
-            $validate = $this->validate($param, 'app\common\validate\Demo.demo');
-            $this->check($validate);
-
             $this->model->saveData($param);
 
             $this->log();
@@ -67,9 +64,6 @@ class SystemDemo extends BaseAuth
         $param = $this->request->param();
 
         if ($this->request->isPost()) {
-            $validate = $this->validate($param, 'app\common\validate\Demo.demo');
-            $this->check($validate);
-
             $this->model->saveData($param);
 
             $this->log();

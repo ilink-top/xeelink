@@ -20,9 +20,21 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-sm-2 control-label">电话</label>
+                <div class="col-sm-6">
+                    <input name="phone" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-sm-2 control-label">头像</label>
                 <div class="col-sm-6">
                     {:widget('Upload/image', ['name' => 'avatar', 'value' => isset($info.avatar) ? $info.avatar : ''])}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">状态</label>
+                <div class="col-sm-6">
+                    <input name="status" type="checkbox" data-on-text="{$data.status[1]}" data-off-text="{$data.status[0]}" value="1" class="switch" checked />
                 </div>
             </div>
             <div class="form-group">

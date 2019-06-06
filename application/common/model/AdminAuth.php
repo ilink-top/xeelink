@@ -37,7 +37,7 @@ class AdminAuth extends Base
 
     public static function deleteData($id)
     {
-        self::transaction(function () use ($id) {
+        return self::transaction(function () use ($id) {
             parent::deleteData($id);
             AdminAuthAccess::where('auth_id', 'in', $id)->delete();
             AdminAuthMenu::where('auth_id', 'in', $id)->delete();

@@ -26,6 +26,10 @@
 <!-- bootstrap-switch -->
 {load href="__STATIC__/plugins/bootstrap-switch/css/bootstrap3/bootstrap-switch.min.css"}
 {load href="__STATIC__/plugins/bootstrap-switch/js/bootstrap-switch.min.js"}
+<!-- fontIconPicker JS -->
+{load href="__STATIC__/plugins/fontIconPicker/css/jquery.fonticonpicker.min.css"}
+{load href="__STATIC__/plugins/fontIconPicker/themes/bootstrap-theme/jquery.fonticonpicker.bootstrap.min.css"}
+{load href="__STATIC__/plugins/fontIconPicker/jquery.fonticonpicker.min.js"}
 <!-- Font Awesome -->
 {load href="__STATIC__/plugins/font-awesome/css/font-awesome.min.css"}
 <!-- toastr -->
@@ -74,6 +78,6 @@
             serverUrl: "{:url('SystemFileUeditor/index')}",
         },
         // 表单预填充数据
-        info: JSON.parse('{:json_encode(isset($info) ? $info : new StdClass())}'),
+        info: {:json_encode(isset($info) ? $info : new StdClass())},
     }
 </script>

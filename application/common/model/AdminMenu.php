@@ -67,7 +67,7 @@ class AdminMenu extends Base
             self::error('有子选项不可删除');
         }
 
-        self::transaction(function () use ($id) {
+        return self::transaction(function () use ($id) {
             parent::deleteData($id);
             AdminAuthMenu::where('menu_id', 'in', $id)->delete();
         });
@@ -134,7 +134,7 @@ class AdminMenu extends Base
             $url = $menu['url'] ? url($menu['url']) : '#';
             $view .= '<li class="' . $active . $class . '">
                 <a href="' . $url . '">
-                    <i class="fa ' . $menu['icon'] . '"></i> <span>' . $menu['title'] . '</span>
+                    <i class="' . $menu['icon'] . '"></i> <span>' . $menu['title'] . '</span>
                     ' . $pullRight . '
                 </a>
                 ' . $treeviewMenu . '

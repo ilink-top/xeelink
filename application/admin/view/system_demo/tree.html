@@ -2,8 +2,28 @@
     <div class="box-header">
         <a href="{:url('add')}" class="btn btn-primary">添加</a>
         <a href="{:url('delete')}" class="btn btn-danger batch_btn confirm ajax-post">删除</a>
+        <div class="box-tools">
+            <form class="form-inline form_single" method="GET">
+                <div class="form-group">
+                    <select name="status" class="form-control">
+                        <option value="-1">状态</option>
+                        {foreach $data.status as $key => $val}
+                        <option value="{$key}">{$val}</option>
+                        {/foreach}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" name="keyword" class="form-control" placeholder="请输入关键词">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="box-body table-responsive">
+    <div class="box-body">
         <table class="table table-bordered table-hover js-checkbox-tree treegrid">
             <thead>
                 <tr>
@@ -12,10 +32,7 @@
                             <input class="icheck js-checkbox-all" type="checkbox">
                         </label>
                     </th>
-                    <th>标题</th>
-                    <th>链接</th>
-                    <th>图标</th>
-                    <th>显示</th>
+                    <th data-orderable="true">名称</th>
                     <th>状态</th>
                     <th>操作</th>
                 </tr>
@@ -29,10 +46,7 @@
                                 data-pid="{$row.parent_id}">
                         </label>
                     </td>
-                    <td>{$row.title}</td>
-                    <td>{$row.url}</td>
-                    <td><i class="{$row.icon}"></i> {$row.icon}</td>
-                    <td>{$row.is_show_text}</td>
+                    <td>{$row.name}</td>
                     <td>{$row.status_text|raw}</td>
                     <td class="col-md-3">
                         <a href="{:url('edit', ['id' => $row.id])}" class="btn btn-primary">编辑</a>

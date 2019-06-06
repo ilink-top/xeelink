@@ -34,12 +34,12 @@ class Base extends Model
             ->column($field, $key);
     }
 
-    public static function getTree($where = [], $order = 'id desc', $field = '*', $limit = 0, $repeat = '······')
+    public static function getTree($where = [], $order = 'id desc', $field = '*', $limit = 0, $prev = '······')
     {
         $list = self::getAll($where, $order, $field, $limit);
         $list = tree_list($list);
         foreach ($list as $row) {
-            $row['prev'] = string_repeat($repeat, $row['level']);
+            $row['prev'] = string_repeat($prev, $row['level']);
         }
         return $list;
     }

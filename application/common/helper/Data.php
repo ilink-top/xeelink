@@ -99,10 +99,22 @@ function tree_list($list, $parent_id = 0, $level = 0)
     $result = [];
     foreach ($list as $row) {
         if ($row['parent_id'] == $parent_id) {
-            $row['title'] = $row['title'];
             $row['level'] = $level;
             $result[] = $row;
             $result = array_merge($result, tree_list($list, $row['id'], $level + 1));
+        }
+    }
+    return $result;
+}
+
+// 获取所有子项
+function children_ids($list, $parent_id = 0)
+{
+    $result = [];
+    foreach ($list as $row) {
+        if ($row['parent_id'] == $parent_id) {
+            $result[] = $row['id'];
+            $result = array_merge($result, children_ids($list, $row['id']));
         }
     }
     return $result;

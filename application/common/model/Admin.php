@@ -60,7 +60,7 @@ class Admin extends Base
             self::error('超级管理员不可删除');
         }
 
-        self::transaction(function () use ($id) {
+        return self::transaction(function () use ($id) {
             parent::deleteData($id);
             AdminAuthAccess::where('user_id', 'in', $id)->delete();
         });

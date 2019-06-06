@@ -25,7 +25,7 @@ class SystemSetting extends BaseAuth
 
         $this->assign([
             'info' => setting(),
-            'storagePluginList' => SystemPlugin::driver(['type' => 'storage']),
+            'storage_plugin_list' => SystemPlugin::driver(['type' => 'storage']),
         ]);
 
         return $this->fetch();

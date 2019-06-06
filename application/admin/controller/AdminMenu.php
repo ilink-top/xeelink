@@ -13,9 +13,8 @@ class AdminMenu extends BaseAuth
 
     public function index()
     {
-        $list = $this->model->getTree([], 'sort asc, id asc');
         $this->assign([
-            'list' => $list,
+            'list' => $this->model->getTree([], 'sort asc, id asc'),
         ]);
         return $this->fetch();
     }
@@ -39,7 +38,7 @@ class AdminMenu extends BaseAuth
                 'is_show' => $this->model->isShowData,
                 'status' => $this->model->statusData,
             ],
-            'menu_list' => $this->model->getTree([], 'sort asc, id asc'),
+            'parent_list' => $this->model->getTree([], 'sort asc, id asc'),
         ]);
         return $this->fetch('edit');
     }
@@ -65,7 +64,7 @@ class AdminMenu extends BaseAuth
                 'status' => $this->model->statusData,
             ],
             'info' => $this->model->get($id),
-            'menu_list' => $this->model->getTree([
+            'parent_list' => $this->model->getTree([
                 ['id', '<>', $id],
             ], 'sort asc, id asc'),
         ]);

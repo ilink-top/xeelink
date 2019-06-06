@@ -13,10 +13,6 @@
                         </label>
                     </th>
                     <th>标题</th>
-                    <th>链接</th>
-                    <th>图标</th>
-                    <th>显示</th>
-                    <th>状态</th>
                     <th>操作</th>
                 </tr>
             </thead>
@@ -25,15 +21,10 @@
                 <tr class="treegrid-{$row.id} {if $row.parent_id} treegrid-parent-{$row.parent_id}{/if}">
                     <td>
                         <label>
-                            <input class="icheck" type="checkbox" name="id[]" value="{$row.id}"
-                                data-pid="{$row.parent_id}">
+                            <input class="icheck" type="checkbox" name="id[]" value="{$row.id}" data-pid="{$row.parent_id}">
                         </label>
                     </td>
                     <td>{$row.title}</td>
-                    <td>{$row.url}</td>
-                    <td><i class="{$row.icon}"></i> {$row.icon}</td>
-                    <td>{$row.is_show_text}</td>
-                    <td>{$row.status_text|raw}</td>
                     <td class="col-md-3">
                         <a href="{:url('edit', ['id' => $row.id])}" class="btn btn-primary">编辑</a>
                         <a href="{:url('delete', ['id' => $row.id])}" class="btn btn-danger confirm ajax-get">删除</a>
@@ -45,5 +36,5 @@
     </div>
 </div>
 <script>
-    webinfo.treeGrid.treeColumn = 1;
+webinfo.treeGrid.treeColumn = 1;
 </script>

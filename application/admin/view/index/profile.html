@@ -22,7 +22,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">头像</label>
                 <div class="col-sm-6">
-                    {:action('Widget/upload', ['type' => 'image' ,'name' => 'avatar', 'value' => isset($info.avatar) ? $info.avatar : ''])}
+                    {:widget('Upload/image', ['name' => 'avatar', 'value' => isset($info.avatar) ? $info.avatar : ''])}
                 </div>
             </div>
             <div class="form-group">

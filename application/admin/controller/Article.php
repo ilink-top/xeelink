@@ -1,11 +1,12 @@
 <?php
 namespace app\admin\controller;
 
-use app\common\model\SystemDemo as SystemDemoModel;
+use app\common\model\Article as ArticleModel;
+use app\common\model\ArticleCategory;
 
-class SystemDemo extends BaseAuth
+class Article extends BaseAuth
 {
-    public function __construct(SystemDemoModel $model)
+    public function __construct(ArticleModel $model)
     {
         parent::__construct();
         $this->model = $model;
@@ -17,11 +18,9 @@ class SystemDemo extends BaseAuth
         $where = $this->map($param);
 
         $this->assign([
-            'data' => [
-                'status' => $this->model->statusData,
-            ],
             'info' => $param,
             'list' => $this->model->getAll($where),
+            'category_list' => ArticleCategory::getTree([], 'sort asc, id asc'),
         ]);
         return $this->fetch();
     }
@@ -29,11 +28,14 @@ class SystemDemo extends BaseAuth
     private function map($param)
     {
         $map = [];
-        if (isset($param['status']) && $param['status'] != -1) {
-            $map[] = ['status', '=', $param['status']];
+        if (isset($param['category_id']) && $param['category_id']) {
+            $category_list = ArticleCategory::getAll([], 'sort asc, id asc');
+            $children_ids = children_ids($category_list, $param['category_id']);
+            $children_ids[] = $param['category_id'];
+            $map[] = ['category_id', 'in', $children_ids];
         }
         if (isset($param['keyword']) && $param['keyword']) {
-            $map[] = ['name', 'like', '%' . $param['keyword'] . '%'];
+            $map[] = ['title', 'like', '%' . $param['keyword'] . '%'];
         }
 
         return $map;
@@ -44,9 +46,6 @@ class SystemDemo extends BaseAuth
         $param = $this->request->param();
 
         if ($this->request->isPost()) {
-            $validate = $this->validate($param, 'app\common\validate\Demo.demo');
-            $this->check($validate);
-
             $this->model->saveData($param);
 
             $this->log();
@@ -54,9 +53,7 @@ class SystemDemo extends BaseAuth
         }
 
         $this->assign([
-            'data' => [
-                'status' => $this->model->statusData,
-            ],
+            'category_list' => ArticleCategory::getTree([], 'sort asc, id asc'),
         ]);
         return $this->fetch('edit');
     }
@@ -67,9 +64,6 @@ class SystemDemo extends BaseAuth
         $param = $this->request->param();
 
         if ($this->request->isPost()) {
-            $validate = $this->validate($param, 'app\common\validate\Demo.demo');
-            $this->check($validate);
-
             $this->model->saveData($param);
 
             $this->log();
@@ -77,10 +71,8 @@ class SystemDemo extends BaseAuth
         }
 
         $this->assign([
-            'data' => [
-                'status' => $this->model->statusData,
-            ],
             'info' => $this->model->get($id),
+            'category_list' => ArticleCategory::getTree([], 'sort asc, id asc'),
         ]);
         return $this->fetch();
     }

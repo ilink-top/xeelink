@@ -14,7 +14,7 @@ class AdminLog extends BaseAuth
     public function index()
     {
         $this->assign([
-            'list' => $this->model->getAll([], 'create_time desc'),
+            'list' => $this->model->getAll(),
         ]);
         return $this->fetch();
     }

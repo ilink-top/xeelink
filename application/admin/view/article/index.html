@@ -1,0 +1,59 @@
+<div class="box">
+    <div class="box-header">
+        <a href="{:url('add')}" class="btn btn-primary">添加</a>
+        <a href="{:url('delete')}" class="btn btn-danger batch_btn confirm ajax-post">删除</a>
+        <div class="box-tools">
+            <form class="form-inline form_single" method="GET">
+                <div class="form-group">
+                    <select name="category_id" class="form-control">
+                        <option value="0">所有类别</option>
+                        {foreach $category_list as $key => $val}
+                        <option value="{$val.id}">{$val.prev}{$val.title}</option>
+                        {/foreach}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" name="keyword" class="form-control" placeholder="请输入关键词">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="box-body">
+        <table class="table table-bordered table-hover datatable" data-order="[]">
+            <thead>
+                <tr>
+                    <th class="checkbox-select-all">
+                        <label>
+                            <input class="icheck js-checkbox-all" type="checkbox">
+                        </label>
+                    </th>
+                    <th data-orderable="true">名称</th>
+                    <th>类别</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {foreach $list as $row}
+                <tr>
+                    <td>
+                        <label>
+                            <input class="icheck" type="checkbox" name="id[]" value="{$row.id}">
+                        </label>
+                    </td>
+                    <td>{$row.title}</td>
+                    <td>{$row.category.title}</td>
+                    <td class="col-md-3">
+                        <a href="{:url('edit', ['id' => $row.id])}" class="btn btn-primary">编辑</a>
+                        <a href="{:url('delete', ['id' => $row.id])}" class="btn btn-danger confirm ajax-get">删除</a>
+                    </td>
+                </tr>
+                {/foreach}
+            </tbody>
+        </table>
+    </div>
+</div>
