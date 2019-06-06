@@ -24,12 +24,12 @@
         </div>
     </div>
     <div class="box-body">
-        <table class="table table-bordered table-hover datatable" data-order="[]">
+        <table class="table table-bordered table-hover js-checkbox-tree datatable" data-order="[]">
             <thead>
                 <tr>
                     <th class="checkbox-select-all">
                         <label>
-                            <input class="icheck js-checkbox-all" type="checkbox">
+                            <input class="icheck" type="checkbox" value="0">
                         </label>
                     </th>
                     <th data-orderable="true">名称</th>
@@ -42,7 +42,7 @@
                 <tr>
                     <td>
                         <label>
-                            <input class="icheck" type="checkbox" name="id[]" value="{$row.id}">
+                            <input class="icheck" type="checkbox" name="id[]" value="{$row.id}" data-pid="0">
                         </label>
                     </td>
                     <td>{$row.title}</td>
