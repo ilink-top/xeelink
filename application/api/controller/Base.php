@@ -15,7 +15,7 @@ class Base extends BaseController
         return $this->result([], 1, $msg);
     }
 
-    protected function exception(\Exception $e)
+    protected function handle(\Exception $e)
     {
         return $this->result([], $e->getCode(), $e->getMessage());
     }

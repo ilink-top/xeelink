@@ -8,7 +8,8 @@ class Article extends Base
     public function index()
     {
         $param = $this->request->param();
-        return ArticleService::getPage($param);
+        $list = ArticleService::getPage($param);
+        return $this->result($list);
     }
 
     public function info()
