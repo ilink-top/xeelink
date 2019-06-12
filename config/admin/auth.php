@@ -6,5 +6,4 @@ return [
     'auth_rule' => 'admin_menu',
     'auth_user' => 'admin',
     'admin_id' => 1,
-    'session_name' => 'admin_id',
 ];

@@ -82,4 +82,30 @@ class Admin extends Base
     {
         return self::getPage([], 'login_time desc', '*', $limit);
     }
+
+    public static function login($username, $password)
+    {
+        $user = self::get([
+            'username' => $username,
+        ]);
+
+        if (empty($user)) {
+            self::error('账户不存在');
+        }
+
+        if (!bcrypt($password, $user['password'])) {
+            self::error('密码错误');
+        }
+
+        $result = self::saveData([
+            'id' => $user->id,
+            'login_ip' => request()->ip(1),
+            'login_time' => time(),
+        ]);
+        if ($result !== true) {
+            self::error('登录失败');
+        }
+
+        return $user;
+    }
 }

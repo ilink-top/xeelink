@@ -1,19 +1,36 @@
 <?php
 namespace app\admin\controller;
 
+use app\common\model\AdminLog;
 use app\common\model\AdminMenu;
+use app\common\model\Auth;
+use think\facade\Config;
+use think\facade\Session;
 
 class BaseLogin extends Base
 {
+    protected $auth;
+    protected $user_id;
+    protected $user_info;
     public function __construct()
     {
         parent::__construct();
+        $this->checkLogin();
+        $this->initAdmin();
+    }
 
-        // 验证登录
-        if (!$this->user_id) {
+    final private function checkLogin()
+    {
+        if (!Session::has('admin_id')) {
             $this->redirect('auth/index');
         }
+        $this->auth = new Auth(Config::pull('auth'));
+        $this->user_id = Session::get('admin_id');
+        $this->user_info = $this->auth->getUserInfo($this->user_id);
+    }
 
+    final private function initAdmin()
+    {
         $menuModel = new AdminMenu();
 
         // 内容过滤
@@ -42,5 +59,15 @@ class BaseLogin extends Base
             // 面包屑视图
             'crumbs_view' => $menuModel->getCrumbsView($crumbs),
         ]);
+    }
+
+    final protected function log($name = '', $uid = 0, $url = '')
+    {
+        if (!setting('open_admin_log')) {
+            return false;
+        }
+        $uid = $uid ?: $this->user_id;
+        $url = $url ?: $this->url();
+        return AdminLog::saveLog($uid, $url, $name);
     }
 }

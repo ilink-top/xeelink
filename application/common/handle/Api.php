@@ -2,6 +2,7 @@
 namespace app\common\handle;
 
 use Exception;
+use think\exception\HttpResponseException;
 
 class Api extends Base
 {
@@ -13,10 +14,11 @@ class Api extends Base
 
     public function render(Exception $exception)
     {
-        $code = $this->getCode($exception);
-        $code = max($code, 1);
-        $msg = $this->getMessage($exception);
-        $apiData = apiReturn($msg, $code, []);
-        return json($apiData, $this->httpCode);
+        return json([
+            'code' => max(1, $this->getCode($exception)),
+            'msg'  => $this->getMessage($exception),
+            'time' => time(),
+            'data' => [],
+        ], $this->httpCode);
     }
 }

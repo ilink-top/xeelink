@@ -21,7 +21,7 @@ class Auth extends Base
         // 超级管理员ID
         'admin_id' => 0,
         // Session名
-        'session_name' => 'user_id'
+        'session_name' => 'user_id',
     ];
 
     public function __construct($config = [])
@@ -218,53 +218,5 @@ class Auth extends Base
         $user_info[$uid] = model($this->config['auth_user'])->get($uid);
 
         return $user_info[$uid];
-    }
-
-    /**
-     * 用户登录
-     * @param string $username 用户名
-     * @param string $password 密码
-     */
-    public function login($username, $password)
-    {
-        $user = model($this->config['auth_user'])->get([
-            'username' => $username,
-        ]);
-
-        if (empty($user)) {
-            $this->error('账户不存在');
-        }
-
-        if (!bcrypt($password, $user['password'])) {
-            $this->error('密码错误');
-        }
-
-        $result = model($this->config['auth_user'])->saveData([
-            'id' => $user->id,
-            'login_ip' => request()->ip(1),
-            'login_time' => time(),
-        ]);
-        if ($result !== true) {
-            $this->error('登录失败');
-        }
-
-        Session::set($this->config['session_name'], $user->id);
-    }
-
-    /**
-     * 退出登录
-     */
-    public function logout()
-    {
-        Session::delete($this->config['session_name']);
-    }
-
-    /**
-     * 判断是否登录
-     * @return int
-     */
-    public function isLogin()
-    {
-        return Session::has($this->config['session_name']) ? Session::get($this->config['session_name']) : 0;
     }
 }

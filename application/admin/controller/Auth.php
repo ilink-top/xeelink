@@ -1,11 +1,14 @@
 <?php
 namespace app\admin\controller;
 
+use app\common\model\Admin;
+use think\facade\Session;
+
 class Auth extends Base
 {
     public function index()
     {
-        if ($this->auth->isLogin()) {
+        if (Session::has('admin_id')) {
             $this->redirect('index/index');
         }
         $this->view->engine->layout(false);
@@ -22,8 +25,9 @@ class Auth extends Base
         $validate = $this->validate($param, 'app\common\validate\Admin.login');
         $this->check($validate);
 
-        $this->auth->login($param['username'], $param['password']);
-        $this->log('用户登录', $this->auth->isLogin());
+        $user = Admin::login($param['username'], $param['password']);
+
+        Session::set('admin_id', $user->id);
 
         return $this->jump();
     }
@@ -33,7 +37,7 @@ class Auth extends Base
      */
     public function logout()
     {
-        $this->auth->logout();
+        Session::delete('admin_id');
 
         return $this->jump();
     }

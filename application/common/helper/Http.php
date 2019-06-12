@@ -25,12 +25,3 @@ function curlPost($url, $param = [])
     curl_close($curl);
     return $data;
 }
-
-function apiReturn($msg = 'OK', $code = '0', $data = [])
-{
-    return [
-        'msg' => $msg,
-        'code' => $code,
-        'data' => $data,
-    ];
-}
