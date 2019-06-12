@@ -187,4 +187,60 @@ INSERT INTO `lib_system_setting` VALUES (2, 'open_admin_log', '0');
 INSERT INTO `lib_system_setting` VALUES (3, 'storage', 'qiniu');
 COMMIT;
 
+-- ----------------------------
+-- Table structure for lib_article
+-- ----------------------------
+DROP TABLE IF EXISTS `lib_article`;
+CREATE TABLE `lib_article` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL DEFAULT '0',
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `keywords` varchar(255) NOT NULL DEFAULT '',
+  `description` varchar(255) NOT NULL DEFAULT '',
+  `content` text NOT NULL,
+  `sort` int(11) NOT NULL DEFAULT '0',
+  `create_time` int(11) NOT NULL DEFAULT '0',
+  `update_time` int(11) NOT NULL DEFAULT '0',
+  `delete_time` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for lib_article_category
+-- ----------------------------
+DROP TABLE IF EXISTS `lib_article_category`;
+CREATE TABLE `lib_article_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `keywords` varchar(255) NOT NULL DEFAULT '',
+  `description` varchar(255) NOT NULL DEFAULT '',
+  `sort` int(11) NOT NULL DEFAULT '0',
+  `create_time` int(11) NOT NULL DEFAULT '0',
+  `update_time` int(11) NOT NULL DEFAULT '0',
+  `delete_time` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for lib_user
+-- ----------------------------
+DROP TABLE IF EXISTS `lib_user`;
+CREATE TABLE `lib_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL DEFAULT '',
+  `password` varchar(255) NOT NULL DEFAULT '',
+  `nickname` varchar(255) NOT NULL DEFAULT '',
+  `avatar` varchar(255) NOT NULL DEFAULT '',
+  `phone` varchar(255) NOT NULL DEFAULT '',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `create_time` int(11) NOT NULL DEFAULT '0',
+  `update_time` int(11) NOT NULL DEFAULT '0',
+  `delete_time` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_username` (`username`) USING BTREE,
+  UNIQUE KEY `unique_phone` (`phone`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 SET FOREIGN_KEY_CHECKS = 1;
+
