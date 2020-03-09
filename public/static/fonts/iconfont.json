@@ -1,0 +1,184 @@
+{
+  "id": "1375523",
+  "name": "vue后台框架",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "446731",
+      "name": "首页",
+      "font_class": "shouye",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "604484",
+      "name": "导出",
+      "font_class": "daochu",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "680985",
+      "name": "企业",
+      "font_class": "qiye",
+      "unicode": "e724",
+      "unicode_decimal": 59172
+    },
+    {
+      "icon_id": "1079496",
+      "name": "汽车",
+      "font_class": "qiche",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "1132451",
+      "name": "发票",
+      "font_class": "fapiao",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "1346645",
+      "name": "百度1",
+      "font_class": "baidu1",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "1356724",
+      "name": "预警",
+      "font_class": "yujing",
+      "unicode": "e72a",
+      "unicode_decimal": 59178
+    },
+    {
+      "icon_id": "1921127",
+      "name": "企业信息",
+      "font_class": "qiyexinxi",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "1933028",
+      "name": "企业",
+      "font_class": "web-icon-",
+      "unicode": "e6cd",
+      "unicode_decimal": 59085
+    },
+    {
+      "icon_id": "2127141",
+      "name": "设置",
+      "font_class": "set",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "4784148",
+      "name": "预警",
+      "font_class": "yujing1",
+      "unicode": "e663",
+      "unicode_decimal": 58979
+    },
+    {
+      "icon_id": "5325651",
+      "name": "案件档案",
+      "font_class": "anjiandangan",
+      "unicode": "e6b6",
+      "unicode_decimal": 59062
+    },
+    {
+      "icon_id": "5809165",
+      "name": "发票",
+      "font_class": "fapiao1",
+      "unicode": "e683",
+      "unicode_decimal": 59011
+    },
+    {
+      "icon_id": "5838475",
+      "name": "统计",
+      "font_class": "tongji",
+      "unicode": "e856",
+      "unicode_decimal": 59478
+    },
+    {
+      "icon_id": "5838820",
+      "name": "统计",
+      "font_class": "tongji1",
+      "unicode": "e878",
+      "unicode_decimal": 59512
+    },
+    {
+      "icon_id": "6345635",
+      "name": "首页",
+      "font_class": "shouye1",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "6445936",
+      "name": "首页",
+      "font_class": "tianchongxing-",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "6560951",
+      "name": "发票",
+      "font_class": "fapiao2",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "7038155",
+      "name": "按钮",
+      "font_class": "anniu",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "7516900",
+      "name": "汽车",
+      "font_class": "qiche1",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "7978117",
+      "name": "预警",
+      "font_class": "yujing2",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "9626853",
+      "name": "发票",
+      "font_class": "fapiao3",
+      "unicode": "e86b",
+      "unicode_decimal": 59499
+    },
+    {
+      "icon_id": "9626994",
+      "name": "预警",
+      "font_class": "yujing3",
+      "unicode": "e88b",
+      "unicode_decimal": 59531
+    },
+    {
+      "icon_id": "9697578",
+      "name": "发票",
+      "font_class": "icon_xinyong_xianxing_jijin-",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
+      "icon_id": "9974390",
+      "name": "预警",
+      "font_class": "yujing4",
+      "unicode": "e6fe",
+      "unicode_decimal": 59134
+    }
+  ]
+}

@@ -23,7 +23,7 @@ return [
     // 应用Trace
     'app_trace'              => false,
     // 是否支持多模块
-    'app_multi_module'       => true,
+    'app_multi_module'       => false,
     // 入口自动绑定模块
     'auto_bind_module'       => false,
     // 注册的根命名空间
@@ -81,7 +81,7 @@ return [
     // PATHINFO变量名 用于兼容模式
     'var_pathinfo'           => 's',
     // 兼容PATH_INFO获取
-    'pathinfo_fetch'         => ['ORIG_PATH_INFO', 'REDIRECT_PATH_INFO', 'REDIRECT_URL'],
+    'pathinfo_fetch'         => ['ORIG_PATH_INFO', 'REDIRECT_PATH_INFO', 'REDIRECT_URL', 'REQUEST_URI'],
     // pathinfo分隔符
     'pathinfo_depr'          => '/',
     // HTTPS代理标识
@@ -101,7 +101,7 @@ return [
     // 合并路由规则
     'route_rule_merge'       => false,
     // 路由是否完全匹配
-    'route_complete_match'   => false,
+    'route_complete_match'   => true,
     // 使用注解路由
     'route_annotation'       => false,
     // 域名根，如thinkphp.cn
@@ -137,10 +137,10 @@ return [
     'exception_tmpl'         => Env::get('think_path') . 'tpl/think_exception.tpl',
 
     // 错误显示信息,非调试模式有效
-    'error_message'          => '页面错误！请稍后再试～',
+    'error_message'          => '操作失败',
     // 显示错误信息
     'show_error_msg'         => false,
     // 异常处理handle类 留空使用 \think\exception\Handle
-    'exception_handle'       => '\app\common\handle\Web',
+    'exception_handle'       => \app\library\ExceptionHandle::class,
 
 ];

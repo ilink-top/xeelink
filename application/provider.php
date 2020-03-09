@@ -11,4 +11,6 @@
 
 // 应用容器绑定定义
 return [
+    'hash' => \app\library\hash\Bcrypt::class,
+    'admin' => \app\library\Admin::class,
 ];
